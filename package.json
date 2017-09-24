@@ -6,7 +6,8 @@
     "eslint": "./node_modules/.bin/eslint --ext .js src/** webpack.config.js server.js",
     "lint": "npm run eslint && npm run stylelint",
     "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss",
-    "start": "node ./server/lib/app.js"
+    "start": "nodemon server.js",
+    "start:debug": "NODE_ENV=development nodemon --inspect server.js"
   },
   "author": "Sams@ne",
   "license": "ISC",
@@ -15,11 +16,14 @@
   },
   "homepage": "https://github.com/devSamsane/bullesdesoiES6#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "chalk": "^2.1.0",
     "compression": "^1.7.0",
     "express": "^4.15.4",
     "glob": "^7.1.2",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "method-override": "^2.3.9",
+    "nodemon": "^1.12.1"
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
