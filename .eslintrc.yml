@@ -3,6 +3,7 @@ plugins:
   - import
 env:
   browser: true
+  node: true
 globals:
   __DEV__: false
 settings:
@@ -11,11 +12,18 @@ settings:
   import/resolver:
     webpack:
       config: webpack.config.js
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module,
+  ecmaFeatures:
+    jsx: true
 rules:
+  eslint-env: 
   import/no-extraneous-dependencies: 0
   import/no-unresolved: 1
   import/extensions: 1
   jsx-a11y/no-static-element-interactions: 0
+  jsx-a11y/href-no-hash: 0
   react/prop-types: 2
   no-unused-expressions: 0
   react/jsx-filename-extension: 0
@@ -36,4 +44,4 @@ rules:
   import/prefer-default-export: 1
   react/no-array-index-key: 1
   no-confusing-arrow: 1
-  standard/computed-property-even-spacing: 1
+  standard/computed-property-even-spacing: [1, even]
