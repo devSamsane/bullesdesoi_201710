@@ -1,0 +1,48 @@
+{
+  "name": "bullesdesoi",
+  "version": "1.0.0",
+  "description": "Web application bullesdesoi.com",
+  "scripts": {
+    "lint": "npm run eslint && npm run stylelint"
+  },
+  "author": "Sams@ne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devSamsane/bullesdesoiES6/issues"
+  },
+  "homepage": "https://github.com/devSamsane/bullesdesoiES6#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "compression": "^1.7.0",
+    "express": "^4.15.4",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/glob": "^5.0.32",
+    "@types/gulp": "^4.0.4",
+    "@types/lodash": "^4.14.74",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-refresh": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.8",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
+    "eslint": "4.7.2",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-html": "^3.2.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "stylelint": "^8.1.1",
+    "stylelint-config-standard": "^17.0.0",
+    "stylelint-webpack-plugin": "^0.9.0"
+  }
+}
