@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Web application bullesdesoi.com",
   "scripts": {
-    "lint": "npm run eslint && npm run stylelint"
+    "eslint": "./node_modules/.bin/eslint --ext .js src/** webpack.config.js server.js",
+    "lint": "npm run eslint && npm run stylelint",
+    "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss"
   },
   "author": "Sams@ne",
   "license": "ISC",
