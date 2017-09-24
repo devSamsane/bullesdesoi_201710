@@ -5,7 +5,8 @@
   "scripts": {
     "eslint": "./node_modules/.bin/eslint --ext .js src/** webpack.config.js server.js",
     "lint": "npm run eslint && npm run stylelint",
-    "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss"
+    "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss",
+    "start": "node ./server/lib/app.js"
   },
   "author": "Sams@ne",
   "license": "ISC",
@@ -43,6 +44,7 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-react": "^7.3.0",
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0",
     "stylelint-webpack-plugin": "^0.9.0"
