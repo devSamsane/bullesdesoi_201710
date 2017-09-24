@@ -62,8 +62,6 @@ const getGlobbedPaths = (globPatterns, excludes) => {
  */
 const validateEnvironmentVariable = () => {
   const environmentFiles = glob.sync(path.resolve('./server/lib/config/env/' + process.env.NODE_ENV + '.js'));
-  console.log(process.env.NODE_ENV);
-  console.log(environmentFiles);
   if (!environmentFiles.length) {
     if (!process.env.NODE_ENV) {
       console.log(chalk.yellow('+ Alerte: Aucune configuration trouvée pour NODE_ENV, paramétrage de l\'environnement par défaut de developpement'));
