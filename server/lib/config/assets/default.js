@@ -2,7 +2,8 @@
 
 module.exports = {
   server: {
-    allJS: ['server.js', 'config/**/*.js', 'modules/*/server/**/*.js'],
-    config: ['modules/*/server/config/*.js']
+    allJS: ['server.js', 'config/**/*.js', 'modules/*/controllers/**/*.js'],
+    config: ['modules/*/!(routes)/**/*.js'],
+    routes: ['modules/*/routes/**/*.js']
   }
 };

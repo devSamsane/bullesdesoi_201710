@@ -20,6 +20,7 @@
     "chalk": "^2.1.0",
     "compression": "^1.7.0",
     "express": "^4.15.4",
+    "express-hbs": "1.0.4",
     "glob": "^7.1.2",
     "lodash": "^4.17.4",
     "method-override": "^2.3.9",
