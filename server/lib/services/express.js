@@ -11,7 +11,6 @@ const hbs = require('express-hbs');
 // déclaration des fichiers de configuration
 const config = require('../config/index')
 
-
 /**
  * Configuration et export du module middleware
  * Active l'ensemble des middlewares déclarés pour app
