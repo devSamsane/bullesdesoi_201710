@@ -6,8 +6,10 @@ const express = require('express');
 const compress = require('compression');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const hbs = require('express-hbs');
 
 // déclaration des fichiers de configuration
+const config = require('../config/index')
 
 
 /**
@@ -34,14 +36,28 @@ module.exports.initMiddleware = (app) => {
 };
 
 /**
- * Configuration et export de la configuration des routes server
- * @name initModulesServerRoutes
+ * Configuration et export du moteur html
+ * @name initViewEngine
+ * @param app
+ */
+module.exports.initViewEngine = (app) => {
+  app.engine('hbs', hbs.express4({
+    partialsDir: path.resolve('./dist/views'),
+    extname: '.html'
+  }));
+  app.set('view engine', 'hbs');
+  app.set('views', path.resolve('./dist/views'));
+};
+
+/**
+ * Configuration et export de la configuration assets.server
+ * @name initModulesConfiguration
  * @param {object} app instance
  */
-module.exports.initModulesServerRoutes = (app) => {
-  // Route par defaut
-  // TODO: pour le moment un res.send uniquement pour valider que la configuration fonctionne, il faudra le modifier par la suite
-
+module.exports.initModulesConfiguration = (app) => {
+  config.files.server.configs.forEach((configPath) => {
+    require(path.resolve(configPath))(app);
+  });
 };
 
 /**
@@ -51,7 +67,20 @@ module.exports.initModulesServerRoutes = (app) => {
  */
 module.exports.initModulesClientRoutes = (app) => {
   // Paramétrage du router et du répertoire de fichiers statiques
-  app.use('/', express.static(__dirname + '/dist'));
+  app.use('/', express.static(path.resolve('./dist')));
+  app.use('/', express.static(path.resolve('./dist/views')));
+};
+
+/**
+ * Configuration et export de la configuration des routes server
+ * @name initModulesServerRoutes
+ * @param {object} app instance
+ */
+module.exports.initModulesServerRoutes = (app) => {
+  // Route par defaut
+  config.files.server.routes.forEach((routePath) => {
+    require(path.resolve(routePath))(app);
+  });
 };
 
 /**
@@ -66,8 +95,14 @@ module.exports.init = () => {
   // Initialisation des middlewares
   this.initMiddleware(app);
 
+  // Initialisation du view engine
+  this.initViewEngine(app);
+
   // Initialisation du module de configuration des routes statiques
   this.initModulesClientRoutes(app);
+
+  // Initialisation du module de configuration
+  this.initModulesConfiguration(app);
 
   // Initialisation routes
   this.initModulesServerRoutes(app);

@@ -114,8 +114,11 @@ const initGlobalConfigFiles = (config, assets) => {
     client: {}
   };
 
-  // Paramétrage des fichiers de configuration
-  config.files.server.configs = getGlobbedPaths(assets.server.config);
+  // Récupération des routes
+  config.files.server.routes = getGlobbedPaths(assets.server.routes);
+
+  // Récupération des fichiers de configuration
+ config.files.server.configs = getGlobbedPaths(assets.server.config);
 };
 
 /**

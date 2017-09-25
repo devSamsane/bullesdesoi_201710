@@ -65,13 +65,13 @@ exports.start = function start () {
     app.listen(config.port, config.host, () => {
       const server = 'http://' + config.host + ':' + config.port;
 
-      console.log(chalk.bgWhite('---'));
+      console.log(chalk.white('---'));
       console.log(chalk.green(config.app.title));
-      console.log();
+      console.log();0
       console.log(chalk.green('Environnement: ' + process.env.NODE_ENV));
       console.log(chalk.green('Serveur: ' + server));
       console.log(chalk.bgMagenta('App version: ' + config.bullesdesoi.version));
-      console.log(chalk.bgWhite('---'));
+      console.log(chalk.white('---'));
     });
 
     return resolve({
