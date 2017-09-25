@@ -1,7 +1,6 @@
 extends: airbnb
 plugins:
   - import
-  - 
 env:
   browser: true
   node: true
@@ -17,7 +16,7 @@ settings:
       config: webpack.config.js
 parserOptions:
   ecmaVersion: 6
-  sourceType: module,
+  sourceType: module
   ecmaFeatures:
     jsx: true
 rules:
@@ -34,39 +33,29 @@ rules:
   react/forbid-prop-types: 0
   space-before-function-paren: [
     2,
-    always,
+    always
   ]
   no-restricted-syntax: 0
   dot-notation: 0
   import/no-webpack-loader-syntax: 0
   import/first: 0
   global-require: 0
-  no-underscore-dangle: 0
   no-param-reassign: 0
   import/prefer-default-export: 1
   react/no-array-index-key: 1
   no-confusing-arrow: 1
-  standard/computed-property-even-spacing: [1, even]
-  no-console: error
-  comma-dangle: [error, never],
-  max-len: [error, 120],
-  one-var: [error, {uninitialized: always, initialized: never}],
-  one-var-declaration-per-line: [error, initializations],
-  filenames/match-regex: [error, ^[a-z0-9\\-\\.]+$],
-  new-cap: [error, {capIsNewExceptions: [Map]}],
-  yoda: [error, always],
-  handle-callback-err: error,
-  object-curly-spacing: [error, never],
-  import/prefer-default-export: off,
-  arrow-parens: [error, as-needed],
-  global-require: off,
-  func-style: [error, declaration],
-  func-names: error,
-  no-underscore-dangle: [error, {allow: [_links, _embedded]}],
-  no-unused-vars: [error, {ignoreRestSiblings: true}],
-  no-multi-spaces: [error, {ignoreEOLComments: true}],
-  eslint-comments/disable-enable-pair: error,
-  eslint-comments/no-duplicate-disable: error,
-  eslint-comments/no-unlimited-disable: error,
-  eslint-comments/no-unused-disable: error,
-  eslint-comments/no-unused-enable: error
+  no-console: [error, {allow: [warn, error]}]
+  comma-dangle: [error, never]
+  max-len: [error, 120]
+  one-var: [error, {uninitialized: always, initialized: never}]
+  one-var-declaration-per-line: [error, initializations]
+  new-cap: [error, {capIsNewExceptions: [Map]}]
+  yoda: [error, always]
+  handle-callback-err: error
+  object-curly-spacing: [error, never]
+  arrow-parens: [error, as-needed]
+  func-style: [error, declaration]
+  func-names: error
+  no-underscore-dangle: [error, {allow: [_links, _embedded]}]
+  no-unused-vars: [error, {ignoreRestSiblings: true}]
+  no-multi-spaces: [error, {ignoreEOLComments: true}]
