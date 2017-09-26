@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Web application bullesdesoi.com",
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint --ext .js server.js",
+    "eslint": "./node_modules/.bin/eslint --ext *.js",
     "lint": "npm run eslint && npm run stylelint",
     "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss",
     "start": "nodemon server.js",

@@ -17,7 +17,7 @@ function startExpress () {
     try {
       app = express.init();
     } catch (error) {
-      console.log(chalk.red(error));
+      console.warn(chalk.red(error));
       return reject(error);
     }
 
@@ -65,13 +65,13 @@ exports.start = function start () {
     app.listen(config.port, config.host, () => {
       const server = 'http://' + config.host + ':' + config.port;
 
-      console.log(chalk.white('---'));
-      console.log(chalk.green(config.app.title));
-      console.log();0
-      console.log(chalk.green('Environnement: ' + process.env.NODE_ENV));
-      console.log(chalk.green('Serveur: ' + server));
-      console.log(chalk.bgMagenta('App version: ' + config.bullesdesoi.version));
-      console.log(chalk.white('---'));
+      console.info(chalk.white('---'));
+      console.info(chalk.green(config.app.title));
+      console.info();
+      console.info(chalk.green(`Environnement:    ${process.env.NODE_ENV}`));
+      console.info(chalk.green(`Serveur:          ${server}`));
+      console.info(chalk.bgMagenta(`App version:  ${config.bullesdesoi.version}`));
+      console.info(chalk.white('---'));
     });
 
     return resolve({

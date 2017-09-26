@@ -27,7 +27,7 @@ const getGlobbedPaths = (globPatterns, excludes) => {
   // globpatterns => déclaration des assets
   // si le paramètre globpatterns est un array alors il faut itérer sur tous les membres de l'array
   if (_.isArray(globPatterns)) {
-    globPatterns.forEach((globPattern) => {
+    globPatterns.forEach(globPattern => {
       // merge de la valeur output
       output = _.union(output, getGlobbedPaths(globPattern, excludes));
     });
@@ -35,9 +35,9 @@ const getGlobbedPaths = (globPatterns, excludes) => {
     if (urlRegex.test(globPatterns)) {
       output.push(globPatterns);
     } else {
-      const files = glob.sync(globPatterns);
+      let files = glob.sync(globPatterns);
       if (excludes) {
-        files = files.map((file) => {
+        files = files.map(file => {
           if (_.isArray(excludes)) {
             for (let i in excludes) {
               if (excludes.hasOwnProperty(i)) {
@@ -52,7 +52,7 @@ const getGlobbedPaths = (globPatterns, excludes) => {
       }
       output = _.union(output, files);
     }
-  } 
+  }
   return output;
 };
 
@@ -61,13 +61,14 @@ const getGlobbedPaths = (globPatterns, excludes) => {
  * @name validateEnvironmentVariable
  */
 const validateEnvironmentVariable = () => {
-  const environmentFiles = glob.sync(path.resolve('./server/lib/config/env/' + process.env.NODE_ENV + '.js'));
+  const environmentFiles = glob.sync(path.resolve(`./server/lib/config/env/${process.env.NODE_ENV}.js`));
   if (!environmentFiles.length) {
     if (!process.env.NODE_ENV) {
-      console.log(chalk.yellow('+ Alerte: Aucune configuration trouvée pour NODE_ENV, paramétrage de l\'environnement par défaut de developpement'));
+      console.warn(chalk.yellow('+ Alerte: Aucune configuration trouvée pour NODE_ENV'));
+      console.warn(chalk.yellow('+ Paramétrage de l\'environnement par défaut: developpement'));
       process.env.NODE_ENV = 'development';
     } else {
-      console.log(chalk.yellow('++ Utilisation de l\'environnement paramétré'));
+      console.warn(chalk.yellow('++ Utilisation de l\'environnement paramétré'));
     }
   }
 };
@@ -77,12 +78,11 @@ const validateEnvironmentVariable = () => {
  * @name validateDomainIsSet
  * @param {object} config
  */
-const validateDomainIsSet = (config) => {
+const validateDomainIsSet = config => {
   if (!config.domain) {
-    console.log(chalk.red('+ Erreur: config.domain n\'est pas défini'));
+    console.error(chalk.red('+ Erreur: config.domain n\'est pas défini'));
   }
 };
-
 
 /**
  * Initialisation des répertoires server et client
@@ -98,7 +98,7 @@ const initGlobalConfigFolders = (config, assets) => {
   };
 
   // Déclaration du répertoire client
-  config.folders.client = process.cwd() + '/dist/';
+  config.folders.client = `${process.cwd()}/dist/`;
 };
 
 /**
@@ -118,7 +118,7 @@ const initGlobalConfigFiles = (config, assets) => {
   config.files.server.routes = getGlobbedPaths(assets.server.routes);
 
   // Récupération des fichiers de configuration
- config.files.server.configs = getGlobbedPaths(assets.server.config);
+  config.files.server.configs = getGlobbedPaths(assets.server.config);
 };
 
 /**
@@ -131,9 +131,9 @@ const initGlobalConfig = () => {
 
   // Récupération des assets par défaut
   const defaultAssets = require(path.resolve('./server/lib/config/assets/default'));
-  
+
   // Récupération des assets selon l'environnement
-  const environmentAssets = require(path.resolve('./server/lib/config/assets/'+ process.env.NODE_ENV + '.js'));
+  const environmentAssets = require(path.resolve(`./server/lib/config/assets/${process.env.NODE_ENV}.js`));
 
   // Merge des assets
   const assets = _.merge(defaultAssets, environmentAssets);
@@ -142,7 +142,7 @@ const initGlobalConfig = () => {
   const defaultConfig = require(path.resolve('./server/lib/config/env/default'));
 
   // Récupération de la configuration selon l'environnement
-  const environmentConfig = require(path.resolve('./server/lib/config/env/' + process.env.NODE_ENV + '.js'));
+  const environmentConfig = require(path.resolve(`./server/lib/config/env/${process.env.NODE_ENV}.js`));
 
   // Merge de la configuration
   const config = _.merge(defaultConfig, environmentConfig);
