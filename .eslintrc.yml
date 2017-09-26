@@ -114,9 +114,11 @@ rules:
   no-lone-blocks: error
   no-mixed-operators: [error, {
     groups: [
-      [==, !=, ===, !==, >, >=, <, <=],
-      [&&, ||],
-      [in, instanceof]
+      ["+", "-", "*", "/", "%", "**"],
+      ["&", "|", "^", "~", "<<", ">>", ">>>"],
+      ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+      ["&&", "||"],
+      ["in", "instanceof"]
     ]
     allowSamePrecedence: true
   }]
