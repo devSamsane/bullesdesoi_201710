@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const app = require('./server/lib/app');
 
 app.start()
-  .catch((error) => {
-    console.log(chalk.red('Echec du démarrage: ' + error.message));
-    throw(error);
+  .catch(error => {
+    console.warn(chalk.red('Echec du démarrage: ' + error.message));
+    throw (error);
   });
