@@ -119,7 +119,7 @@ rules:
       ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
       ["&&", "||"],
       ["in", "instanceof"]
-    ]
+    ],
     allowSamePrecedence: true
   }]
   no-mixed-spaces-and-tabs: error
