@@ -184,8 +184,15 @@ rules:
   space-infix-ops: error
   space-unary-ops: [error, { words: true, nonwords: false }]
   spaced-comment: [error, always, {
-    line: { markers: [*package, !, /, ,, =] },
-    block: { balanced: true, markers: [*package, !, ,, :, ::, flow-include], exceptions: [*] }
+    line: {
+      markers: ["/"],
+      exceptions: ["-", "+"]
+    },
+    block: {
+      balanced: true,
+      markers: ["!"],
+      exceptions: ["*"]
+    }
   }]
   symbol-description: error
   template-curly-spacing: [error, never]
