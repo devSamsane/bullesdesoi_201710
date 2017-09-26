@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   app: {
     title: 'Bulles de Soi',

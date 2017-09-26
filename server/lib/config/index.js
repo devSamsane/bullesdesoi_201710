@@ -1,7 +1,7 @@
 // déclaration nodeJS
 const path = require('path');
 const glob = require('glob');
-const fs = require('fs');
+// const fs = require('fs');
 
 // déclaration des librairies
 const _ = require('lodash');
@@ -18,7 +18,7 @@ const chalk = require('chalk');
  */
 const getGlobbedPaths = (globPatterns, excludes) => {
   // déclaration du regex de récupération des dossiers
-  const urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
+  const urlRegex = new RegExp('^(?:[a-z]+:)?//', 'i');
 
   // intialisation de la variable de sortie
   let output = [];
@@ -39,7 +39,8 @@ const getGlobbedPaths = (globPatterns, excludes) => {
       if (excludes) {
         files = files.map(file => {
           if (_.isArray(excludes)) {
-            for (let i in excludes) {
+            let i;
+            for (i in excludes) {
               if (excludes.hasOwnProperty(i)) {
                 file = file.replace(excludes[i], '');
               }

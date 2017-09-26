@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const hbs = require('express-hbs');
 
 // déclaration des fichiers de configuration
-const config = require('../config/index')
+const config = require('../config/index');
 
 /**
  * Configuration et export du module middleware
@@ -17,7 +17,7 @@ const config = require('../config/index')
  * @name initMiddleware
  * @param {object} app instance
  */
-module.exports.initMiddleware = (app) => {
+module.exports.initMiddleware = app => {
   // Compression
   app.use(compress({
     filter: function (req, res) {
@@ -39,7 +39,7 @@ module.exports.initMiddleware = (app) => {
  * @name initViewEngine
  * @param app
  */
-module.exports.initViewEngine = (app) => {
+module.exports.initViewEngine = app => {
   app.engine('hbs', hbs.express4({
     partialsDir: path.resolve('./dist/views'),
     extname: '.html'
@@ -53,8 +53,8 @@ module.exports.initViewEngine = (app) => {
  * @name initModulesConfiguration
  * @param {object} app instance
  */
-module.exports.initModulesConfiguration = (app) => {
-  config.files.server.configs.forEach((configPath) => {
+module.exports.initModulesConfiguration = app => {
+  config.files.server.configs.forEach(configPath => {
     require(path.resolve(configPath))(app);
   });
 };
@@ -64,7 +64,7 @@ module.exports.initModulesConfiguration = (app) => {
  * @name initModulesClientRoutes
  * @param {object} app instance
  */
-module.exports.initModulesClientRoutes = (app) => {
+module.exports.initModulesClientRoutes = app => {
   // Paramétrage du router et du répertoire de fichiers statiques
   app.use('/', express.static(path.resolve('./dist')));
   app.use('/', express.static(path.resolve('./dist/views')));
@@ -75,9 +75,9 @@ module.exports.initModulesClientRoutes = (app) => {
  * @name initModulesServerRoutes
  * @param {object} app instance
  */
-module.exports.initModulesServerRoutes = (app) => {
+module.exports.initModulesServerRoutes = app => {
   // Route par defaut
-  config.files.server.routes.forEach((routePath) => {
+  config.files.server.routes.forEach(routePath => {
     require(path.resolve(routePath))(app);
   });
 };

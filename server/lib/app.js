@@ -11,7 +11,6 @@ const express = require('./services/express');
  */
 function startExpress () {
   return new Promise((resolve, reject) => {
-
     // Initialisation de l'application
     let app;
     try {
@@ -42,7 +41,7 @@ function bootstrap () {
 
     return resolve(app);
   });
-};
+}
 
 // Exposition publique de la fonction bootstrap
 exports.bootstrap = bootstrap;
@@ -61,9 +60,9 @@ exports.start = function start () {
       return reject(error);
     }
 
-    //Démarrage du server web sur le port et host
+    // Démarrage du server web sur le port et host
     app.listen(config.port, config.host, () => {
-      const server = 'http://' + config.host + ':' + config.port;
+      const server = `http://${config.host}:${config.port}`;
 
       console.info(chalk.white('---'));
       console.info(chalk.green(config.app.title));
@@ -77,6 +76,5 @@ exports.start = function start () {
     return resolve({
       app: app
     });
-
   });
 };
