@@ -9,7 +9,8 @@ const winstonExpress = require('express-winston');
 // Déclaration des fichiers de configuration
 const config = require('../config/index');
 
-let logger; loggerExpress;
+let logger;
+let loggerExpress;
 
 module.exports = class Logger {
   static log () {
@@ -71,7 +72,7 @@ module.exports = class Logger {
   }
 
   // Utilisation de Express Logger
-  static loggerExpress() {
+  static logExpress () {
     if (loggerExpress) {
       return loggerExpress;
     }
