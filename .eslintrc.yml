@@ -146,7 +146,7 @@ rules:
   no-self-assign: error
   no-self-compare: error
   no-sequences: error
-  no-shadow: [error, allow: "done", "resolve", "reject", "router"]
+  no-shadow: [error, allow: "router"]
   no-sparse-arrays: error
   no-tabs: error
   no-template-curly-in-string: error
