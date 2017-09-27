@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Web application bullesdesoi.com",
   "scripts": {
+    "start:dev": "gulp default",
+    "start:lint": "gulp lint",
+    "start:gulpDebug": "gulp debug",
     "eslint": "./node_modules/.bin/eslint --ext .js server/",
     "lint": "npm run eslint && npm run stylelint",
     "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss",
@@ -38,6 +41,7 @@
     "gulp-refresh": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.8",
+    "run-sequence": "2.2.0",
     "tslint": "^5.7.0",
     "typescript": "^2.5.2",
     "eslint": "4.7.2",
