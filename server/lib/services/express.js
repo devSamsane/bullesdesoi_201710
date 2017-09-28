@@ -10,6 +10,9 @@ const hbs = require('express-hbs');
 
 // déclaration des fichiers de configuration
 const config = require('../config/index');
+// FIXME: A enlever si non nécessaire par la suite
+// const log = require('./logger').log();
+const expressLogger = require('./logger').logExpress();
 
 /**
  * Configuration et export du module middleware
@@ -25,6 +28,9 @@ module.exports.initMiddleware = app => {
     },
     level: 9
   }));
+
+  // Utilisation du logger
+  app.use(expressLogger);
 
   // Body-parser
   app.use(bodyParser.urlencoded({
