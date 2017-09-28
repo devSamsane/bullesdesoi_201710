@@ -1,14 +1,14 @@
-// déclaration nodeJS
+// Déclaration nodeJS
 const path = require('path');
 
-// déclaration des librairies
+// Déclaration des librairies
 const express = require('express');
 const compress = require('compression');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const hbs = require('express-hbs');
 
-// déclaration des fichiers de configuration
+// Déclaration des fichiers de configuration
 const config = require('../config/index');
 // FIXME: A enlever si non nécessaire par la suite
 // const log = require('./logger').log();
@@ -135,7 +135,7 @@ module.exports.init = () => {
 
   // Initialisation routes
   this.initModulesServerRoutes(app);
-  
+
   // Initialisation du error handler
   this.initErrorRoutes(app);
 
