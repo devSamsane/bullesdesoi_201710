@@ -89,6 +89,30 @@ module.exports.initModulesServerRoutes = app => {
 };
 
 /**
+ * Configuration de la gestion des erreurs
+ * @name initErrorRoutes
+ * @param {object} app instance
+ */
+module.exports.initErrorRoutes = app => {
+  app.use((err, req, res, next) => {
+    // Vérification qu'une erreur existe bien
+    if (!err) {
+      return next;
+    }
+
+    // Si elle existe, on logge l'erreur
+    console.error(err.stack);
+
+    // Construction de la réponse erreur
+    // Envoi de l'erreur et du code erreur
+    res.status(err.status).send({
+      message: err.message,
+      code: err.code
+    });
+  });
+};
+
+/**
  * Export module 'app', création de l'application Express
  * @name init
  * @returns {*} app express
@@ -111,6 +135,9 @@ module.exports.init = () => {
 
   // Initialisation routes
   this.initModulesServerRoutes(app);
+  
+  // Initialisation du error handler
+  this.initErrorRoutes(app);
 
   return app;
 };
