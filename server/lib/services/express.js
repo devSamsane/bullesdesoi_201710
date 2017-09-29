@@ -105,7 +105,7 @@ module.exports.initErrorRoutes = app => {
 
     // Construction de la réponse erreur
     // Envoi de l'erreur et du code erreur
-    res.status(err.status).send({
+    return res.status(err.status).send({
       message: err.message,
       code: err.code
     });
