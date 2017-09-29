@@ -7,15 +7,38 @@ const compress = require('compression');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const hbs = require('express-hbs');
+// REVIEW: Lusca configuration nécessaire si utilisation d'une session vs token
+// const lusca = require('lusca');
+const helmet = require('helmet');
 
 // Déclaration des fichiers de configuration
 const config = require('../config/index');
-// FIXME: A enlever si non nécessaire par la suite
+// REVIEW: A enlever si non nécessaire par la suite
 // const log = require('./logger').log();
 const expressLogger = require('./logger').logExpress();
 
 /**
- * Configuration et export du module middleware
+ * Initialisation des variables locales expressJS
+ * @name initLocalVariables
+ * @param {object} app instance
+ */
+module.exports.initLocalVariables = app => {
+  app.locals.title = config.app.title;
+  app.locals.description = config.app.description;
+  app.locals.keywords = config.app.keywords;
+  app.locals.env = process.env.NODE_ENV;
+  app.locals.domain = config.domain;
+
+  // Passage des paramètres URL de la requête aux variables locales
+  app.use((req, res, next) => {
+    res.locals.host = `${req.protocol}://${req.hostname}`;
+    res.locals.url = `${req.protocol}://${req.headers.host}${req.originalUrl}`;
+    next();
+  });
+};
+
+/**
+ * Initialisation et export du module middleware
  * Active l'ensemble des middlewares déclarés pour app
  * @name initMiddleware
  * @param {object} app instance
@@ -41,7 +64,7 @@ module.exports.initMiddleware = app => {
 };
 
 /**
- * Configuration et export du moteur html
+ * Initialisation et export du moteur html
  * @name initViewEngine
  * @param app
  */
@@ -55,7 +78,29 @@ module.exports.initViewEngine = app => {
 };
 
 /**
- * Configuration et export de la configuration assets.server
+ * Initialisation et export du middleware helmet
+ * @name initHelmetHeaders
+ * @param {object} app instance
+ */
+module.exports.initHelmetHeaders = app => {
+  // Définition du max_age pour la configuration hsts (Strict-Transport-Security HTTP)
+  // Le navigateur visitera seulement le site en https pour les visites dans les max_age jours
+  const SIX_MONTHS = 15778476000;
+
+  app.use(helmet.frameguard()); // Protection clickjacking
+  app.use(helmet.xssFilter()); // Protection XSS (faible)
+  app.use(helmet.noSniff()); // Protection sniffing MIME type
+  app.use(helmet.ieNoOpen()); // Configuration X-Download-Options IE8+
+  app.use(helmet.hsts({
+    maxAge: SIX_MONTHS,
+    includeSubdomains: true,
+    force: true
+  }));
+  app.use(helmet.hidePoweredBy()); // Ne pas afficher x-powered-by
+};
+
+/**
+ * Initialisation et export de la configuration assets.server
  * @name initModulesConfiguration
  * @param {object} app instance
  */
@@ -66,7 +111,7 @@ module.exports.initModulesConfiguration = app => {
 };
 
 /**
- * Configuration et export des fichiers statiques
+ * Initialisation et export des fichiers statiques
  * @name initModulesClientRoutes
  * @param {object} app instance
  */
@@ -77,7 +122,7 @@ module.exports.initModulesClientRoutes = app => {
 };
 
 /**
- * Configuration et export de la configuration des routes server
+ * Initialisation et export de la configuration des routes server
  * @name initModulesServerRoutes
  * @param {object} app instance
  */
@@ -89,7 +134,7 @@ module.exports.initModulesServerRoutes = app => {
 };
 
 /**
- * Configuration de la gestion des erreurs
+ * Initialisation de la gestion des erreurs
  * @name initErrorRoutes
  * @param {object} app instance
  */
@@ -121,22 +166,28 @@ module.exports.init = () => {
   // Déclaration de l'application ExpressJS
   const app = express();
 
-  // Initialisation des middlewares
+  // Activation des variables locales
+  this.initLocalVariables(app);
+
+  // Activation des middlewares
   this.initMiddleware(app);
 
-  // Initialisation du view engine
+  // Activation de Helmet
+  this.initHelmetHeaders(app);
+
+  // Activation du view engine
   this.initViewEngine(app);
 
-  // Initialisation du module de configuration des routes statiques
+  // Activation du module de configuration des routes statiques
   this.initModulesClientRoutes(app);
 
-  // Initialisation du module de configuration
+  // Activation du module de configuration
   this.initModulesConfiguration(app);
 
-  // Initialisation routes
+  // Activation routes
   this.initModulesServerRoutes(app);
 
-  // Initialisation du error handler
+  // Activation du error handler
   this.initErrorRoutes(app);
 
   return app;

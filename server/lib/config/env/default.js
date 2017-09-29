@@ -26,9 +26,15 @@ module.exports = {
       // sslCert: fs.readFileSync('../sslcerts/ssl-cert.pem'),
       // sslKey: fs.readFileSync('../sslcerts/ssl-key.pem'),
       // sslPass: 'Q0J%6Luc~<4|)73'
-    }
+    },
+    // Activation du mode debug
+    debug: process.env.MONGODB_DEBUG || false
   },
-
-  // Activation du mode debug
-  debug: process.env.MONGODB_DEBUG || false
+  csrf: {
+    csrf: false,
+    csp: false,
+    xframe: 'SAMEORIGIN',
+    p3p: 'ABCDEF',
+    xssProtection: true
+  }
 };
