@@ -16,7 +16,6 @@ module.exports = {
   },
   db: {
     promise: global.Promise,
-    uri: process.env.MONGODB_URI || `mongodb://${(process.env.DB_1_PORT_27017_TCP_ADDR) || 'localhost'}`,
     options: {
       // Paramètres nécessaires pour activer l'auth par certificat sous mongodb
       // ssl: true,

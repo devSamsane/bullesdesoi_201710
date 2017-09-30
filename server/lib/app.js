@@ -4,6 +4,27 @@ const chalk = require('chalk');
 // déclaration des fichiers de configuration
 const config = require('./config/index');
 const express = require('./services/express');
+const mongoose = require('./services/mongoose');
+
+/**
+ * Etablissement de la connexion à MongoDB
+ * Instanciation des models
+ * @name startMongoose
+ * @returns {object} dbConnection 
+ */
+function startMongoose () {
+  return new Promise((resolve, reject) => {
+    mongoose.loadModels()
+      .then(mongoose.connect)
+      .then(dbConnection => {
+        resolve(dbConnection);
+      })
+      .catch(error => {
+        console.error(chalk.red(error));
+        reject(error);
+      });
+  });
+}
 
 /**
  * Initialisation du server web
@@ -32,14 +53,19 @@ function startExpress () {
 function bootstrap () {
   return new Promise(async (resolve, reject) => {
     let app;
+    let db;
 
     try {
+      db = await startMongoose();
       app = await startExpress();
     } catch (error) {
-      return reject(new Error('Impossible d\'intialiser ExpressJS'));
+      return reject(new Error('Impossible d\'intialiser ExpressJS ou le service Mongoose'));
     }
 
-    return resolve(app);
+    return resolve({
+      db: db,
+      app: app
+    });
   });
 }
 
@@ -53,9 +79,10 @@ exports.bootstrap = bootstrap;
 exports.start = function start () {
   return new Promise(async (resolve, reject) => {
     let app;
+    let db;
 
     try {
-      app = await bootstrap();
+      ({db, app} = await bootstrap());
     } catch (error) {
       return reject(error);
     }
@@ -69,11 +96,13 @@ exports.start = function start () {
       console.info();
       console.info(chalk.green(`Environnement:    ${process.env.NODE_ENV}`));
       console.info(chalk.green(`Serveur:          ${server}`));
+      console.info(chalk.green(`Database:         ${config.db.uri}`));
       console.info(chalk.bgMagenta(`App version:  ${config.bullesdesoi.version}`));
       console.info(chalk.white('---'));
     });
 
     return resolve({
+      db: db,
       app: app
     });
   });

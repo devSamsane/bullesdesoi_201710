@@ -43,7 +43,7 @@ rules:
   react/no-array-index-key: 1
   no-confusing-arrow: 1
   no-console: [error, {allow: [info, warn, error]}]
-  max-len: [error, 120]
+  max-len: [warn, 120]
   one-var: [error, { var: "never", let: "never", const: "never" }]
   one-var-declaration-per-line: [error, initializations]
   object-curly-spacing: [error, never]

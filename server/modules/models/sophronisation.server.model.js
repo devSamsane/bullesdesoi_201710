@@ -27,7 +27,10 @@ const SophronisationSchema = new Schema({
     required: true
   },
   type: {
-    type: String,
+    type: [{
+      type: String,
+      enum: ['présentation', 'futurisation', 'prétérisation', 'totalisation']
+    }],
     required: true
   },
   name: {

@@ -1,4 +1,5 @@
 // Déclaration nodeJS
+const path = require('path');
 
 // Déclaration des librairies
 const chalk = require('chalk');
@@ -6,6 +7,19 @@ const mongoose = require('mongoose');
 
 // Déclaration des fichiers de configuration
 const config = require('../config/index');
+
+/**
+ * Chargement des models mongoose
+ * @name loadModels
+ */
+module.exports.loadModels = () => new Promise((resolve, reject) => {
+  // Concaténation de l'ensemble des models
+  config.files.server.models.forEach(modelPath => {
+    require(path.resolve(modelPath));
+  });
+
+  resolve();
+});
 
 /**
  * Connexion au serveur MongoDB
