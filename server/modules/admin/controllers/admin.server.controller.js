@@ -40,12 +40,10 @@ exports.userByID = (req, res, next, userId) => {
       });
       return next();
     }
-
     // Passage des informations du user au middleware
     req.modelUser = user;
-    return next();
+    next();
   });
-  return next();
 };
 
 /**
@@ -57,7 +55,7 @@ exports.userByID = (req, res, next, userId) => {
  */
 exports.createUser = (req, res) => {
   // Récupération des champs du body posté dans le formulaire
-  const user = new User(req.body.content);
+  const user = new User(req.body);
   user.provider = 'local';
 
   // Sauvegarde du user dans mongoDB
@@ -73,6 +71,31 @@ exports.createUser = (req, res) => {
 
     return res.status(201).json({
       title: 'Création du user',
+      message: 'Succés'
+    });
+  });
+};
+
+/**
+ * Initialisation et export de la méthode deleteUser
+ * Suppression d'un user via le backoffice d'administration
+ * TODO: Ajouter le filtre qui vérifie que l'admin est authentifié et bien admin
+ * TODO: Répercuter la suppression de l'utilisateur sur l'ensemble des collections
+ * @name deleteUser
+ */
+exports.deleteUser = (req, res) => {
+  const user = req.modelUser;
+
+  user.remove(error => {
+    if (error) {
+      return res.status(409).json({
+        title: 'La requête ne peut pas être traitée',
+        message: `L'utilisateur ${user} est inconnu`
+      });
+    }
+
+    return res.status(200).json({
+      title: `Suppression du user: ${user}`,
       message: 'Succés'
     });
   });

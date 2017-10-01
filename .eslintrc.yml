@@ -42,6 +42,7 @@ rules:
   import/prefer-default-export: 1
   react/no-array-index-key: 1
   no-confusing-arrow: 1
+  consistent-return: warn
   no-console: [error, {allow: [info, warn, error]}]
   max-len: [warn, 120]
   one-var: [error, { var: "never", let: "never", const: "never" }]

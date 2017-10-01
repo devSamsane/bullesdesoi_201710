@@ -15,6 +15,7 @@ module.exports = router => {
   // TODO: Mettre les routes utilisateurs en tête de liste (évite un accès non authorisé)
   // Routes user
   router.route('/api/users/').post(admin.createUser);
+  router.route('/api/users/:userId').delete(admin.deleteUser);
 
   // Mise en place du lien middleware
   router.param('userId', admin.userByID);
