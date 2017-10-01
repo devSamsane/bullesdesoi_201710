@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/devSamsane/bullesdesoiES6#readme",
   "dependencies": {
+    "bcrypt": "1.0.3",
     "body-parser": "^1.18.2",
     "chalk": "^2.1.0",
     "compression": "^1.7.1",
@@ -33,6 +34,7 @@
     "mongoose": "4.11.13",
     "morgan": "1.9.0",
     "nodemon": "^1.12.1",
+    "validador": "0.1.6",
     "winston": "2.3.1"
   },
   "devDependencies": {

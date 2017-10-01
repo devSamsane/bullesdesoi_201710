@@ -1,6 +1,7 @@
 // Déclaration des librairies nodeJS
 
 // Déclaration des librairies
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -84,6 +85,32 @@ const UserSchema = new Schema({
     default: true
   }
 });
+
+/**
+ * Hashage du mot de passe
+ * Utilisation de la méthode `pre`, exécuté sur chaque `save` du model
+ * Vérification que le mot de passe est modifié (méthode isModified de mongoose)
+ */
+UserSchema.pre('save', next => {
+  if (this.password && this.isModified('password')) {
+    // Création du sel (10 tours)
+    const salt = bcrypt.genSaltSync(10);
+    // Hashage du mot de passe
+    const hash = bcrypt.hashSync(this.password, salt);
+    // Sauvegarde du hash
+    this.password = hash;
+  }
+  next();
+});
+
+/**
+ * Authentification: Vérification du mot de passe
+ * Comparaison d'un string avec le password (hash) du user
+ * @name authenticate
+ * @param {string} password
+ * @returns {boolean}
+ */
+UserSchema.methods.authenticate = password => bcrypt.compareSync(password, this.password);
 
 /**
  * Initialisation du model
