@@ -24,6 +24,7 @@ class AdminService {
     // Configuration du provider
     // Via le backend, le provider prend la valeur `local`
     userObject.provider = 'local';
+    userObject.displayName = `${userObject.firstname} ${userObject.lastname}`;
 
     // Suppression du rôle de l'object userObject
     // Utilisation du default du model
@@ -31,7 +32,7 @@ class AdminService {
     delete userObject.role;
 
     // Création du mot de passe
-    userObject.password = await UserService.generateRandom();
+    userObject.password = await UserService.generateRandomPassphrase();
 
     // TODO: Envoi des informations par email
     // if(userObject.email) {

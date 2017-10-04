@@ -35,5 +35,14 @@ module.exports = {
     xframe: 'SAMEORIGIN',
     p3p: 'ABCDEF',
     xssProtection: true
+  },
+  shared: {
+    owasp: {
+      allowPassphrases: false,
+      maxLength: 16,
+      minLength: 8,
+      minPhraseLength: 20,
+      minOptionalTestsToPass: 4
+    }
   }
 };

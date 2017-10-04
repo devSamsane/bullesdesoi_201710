@@ -9,7 +9,7 @@ const owasp = require('owasp-password-strength-test');
 
 // Déclaration des fichiers de configuration
 const config = require(path.resolve('./server/lib/config/index.js'));
-const UserRepository = require('../repositories/user.repository'),
+const UserRepository = require('../repositories/user.repository');
 
 // Paramétrage bcrypt
 const SALT_ROUNDS = 10;
@@ -21,15 +21,15 @@ const SALT_ROUNDS = 10;
  */
 class UserService {
 
-   /**
-   * Méthode de hashage du mot de passe
-   * TODO: Vérifier que le mot de passe ou la passphrase fait au maximum 72 caractères sinon renvoyer une erreur 
-   * @static hashPassword
-   * @param {string} password 
-   * @memberof UserService
-   */
+  /**
+  * Méthode de hashage du mot de passe
+  * TODO: Vérifier que le mot de passe ou la passphrase fait au maximum 72 caractères sinonrenvoyer une erreur 
+  * @static hashPassword
+  * @param {string} password 
+  * @memberof UserService
+  */
   static async hashPassword (password) {
-    return bcrypt.hash(String(password), SALT_ROUNDS)
+    return bcrypt.hash(String(password), SALT_ROUNDS);
   }
 
   /**
@@ -38,37 +38,35 @@ class UserService {
    * @static generateRandomPassphrase
    * @memberof UserService
    */
-    static async generateRandomPassphrase () {
-      return new Promise((resolve, reject) => {
+  static async generateRandomPassphrase () {
+    return new Promise((resolve, reject) => {
+      // Définition des variables
+      let password = '';
+      const repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
+      // Itération tant que le mot de passe ne respecte pas les exigences
+      // Longueur du mot de passe entre 8 et 16 caractères
+      while (password.length < 12 || repeatingCharacters.test(password)) {
+        // Construction du mot de passe
+        password = generatePassword.generate({
+          length: Math.floor(Math.random() * (16)) + 6,
+          numbers: true,
+          symbols: true,
+          uppercase: true,
+          excludeSimilarCharacters: true
+        });
+        // Vérification de la nécessité de retirer des caractères doublonnés
+        password = password.replace(repeatingCharacters, '');
+      }
 
-        // Définition des variables
-        let password = '';
-        const repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
-
-        // Itération tant que le mot de passe ne respecte pas les exigences
-        // Longueur du mot de passe entre 8 et 16 caractères
-        while(password.length < 16 || repeatingCharacters.test(password)) {
-          // Construction du mot de passe
-          password = generatePassword.generate({
-            length: Math.floor(Math.random() * (8)) + 8,
-            numbers: true,
-            symbols: false,
-            uppercase: true,
-            excludeSimilarCharacters: true
-          });
-
-          // Vérification de la nécessité de retirer des caractères doublonnés
-          password = password.replace(repeatingCharacters, '');
-        }
-
-        // Envoi de l'échec si le mot de passe ne respecte pas les tests owasp
-        if (owasp.test(password).errors.length) {
-          reject(new Error('Une erreur est survenue lors de la création du mot de passe'));
-        } else {
-          resolve(password);
-        }
-      });
-    }
+      // Envoi de l'échec si le mot de passe ne respecte pas les tests owasp
+      console.log('owasp: ', owasp.test(password).errors);
+      if (owasp.test(password).errors.length) {
+        reject(new Error('Une erreur est survenue lors de la création du mot de passe'));
+      } else {
+        resolve(password);
+      }
+    });
+  }
 }
 
 module.exports = UserService;

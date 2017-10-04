@@ -5,6 +5,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 // Déclaration des fichiers de configuration
+const AdminService = require('../services/admin.service');
+const ApiError = require(path.resolve('./server/lib/helpers/ApiError'));
 
 // Initialisation des models
 let User = require(path.resolve('./server/modules/models/user.server.model'));
@@ -53,27 +55,14 @@ exports.userByID = (req, res, next, userId) => {
  * @name createUser
  * @param {object} userObject
  */
-exports.createUser = (req, res) => {
-  // Récupération des champs du body posté dans le formulaire
-  const user = new User(req.body);
-  user.provider = 'local';
-
-  // Sauvegarde du user dans mongoDB
-  user.save(error => {
-    if (error) {
-      return res.status(422).json({
-        title: 'Une erreur est survenue',
-        message: error
-      });
-    }
-    // Suppression des valeurs sensibles du middleware
-    user.password = undefined;
-
-    return res.status(201).json({
-      title: 'Création du user',
-      message: 'Succés'
-    });
-  });
+exports.adminSignup = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const user = await AdminService.createUser(req.body);
+    return res.json(user);
+  } catch (error) {
+    return next(new ApiError(error.message));
+  }
 };
 
 /**
