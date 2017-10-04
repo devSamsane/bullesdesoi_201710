@@ -17,7 +17,7 @@ class UserRepository {
 
   // Création d'un utilisateur
   static create (userObject) {
-    const user = new User (userObject);
+    const user = new User(userObject);
 
     return user.save();
   }
@@ -25,12 +25,12 @@ class UserRepository {
   // Récupération d'un utilisateur par son id
   static getUserById (id) {
 
-    return User.findOne({ _id: String(id) }).exec();
+    return User.findOne({_id: String(id)}).exec();
   }
 
   // Récupération d'un utilisateur par son email
   static getUserByEmail (email) {
-    return User.findOne({ username: String(email) }).exec();
+    return User.findOne({username: String(email)}).exec();
   }
 }
 

@@ -18,7 +18,14 @@ const UserService = require(path.resolve('./server/modules/users/services/user.s
  */
 class AdminService {
 
-  // Création d'un utilisateur via le backend d'admin
+  /**
+   * Méthode de création d'un utilisateur par le backoffice d'administration
+   * 
+   * @static createUser
+   * @param {object} userObject 
+   * @returns {object} user json
+   * @memberof AdminService
+   */
   static async createUser (userObject) {
 
     // Configuration du provider
@@ -53,6 +60,17 @@ class AdminService {
 
     // Renvoi de l'objet user créée
     return Promise.resolve(user);
+  }
+
+  /**
+   * Méthode de suppression d'un utilisateur, via son id
+   * 
+   * @static deleteUser
+   * @param {any} userId 
+   * @memberof AdminService
+   */
+  static async deleteUser (userId) {
+    return userId.remove();
   }
 }
 

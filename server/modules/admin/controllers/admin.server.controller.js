@@ -52,12 +52,11 @@ exports.userByID = (req, res, next, userId) => {
  * Initialisation et export de la méthode createUser
  * Création d'un user via le backoffice d'administration
  * TODO: Ajouter le filtre qui vérifie que l'admin est authentifié et bien admin
- * @name createUser
+ * @name signupByAdmin
  * @param {object} userObject
  */
-exports.adminSignup = async (req, res, next) => {
+exports.signupByAdmin = async (req, res, next) => {
   try {
-    console.log(req.body);
     const user = await AdminService.createUser(req.body);
     return res.json(user);
   } catch (error) {
@@ -88,4 +87,8 @@ exports.deleteUser = (req, res) => {
       message: 'Succés'
     });
   });
+};
+
+exports.deleteByAdmin = (req, res) => {
+  return AdminService.deleteUser();
 };

@@ -21,6 +21,28 @@ const SALT_ROUNDS = 10;
  */
 class UserService {
 
+  static deserialize (user) {
+    if (!user || typeof user !== 'object') {
+      return null;
+    }
+
+    return {
+      id: user.id,
+      displayName: user.displayName,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.username,
+      email: user.email,
+      provider: user.provider,
+      created: user.created
+    };
+  }
+
+  static async getUserDeserializedById (id) {
+    const user = await UserRepository.getById(id);
+    return this.deserialize(user);
+  }
+
   /**
   * Méthode de hashage du mot de passe
   * TODO: Vérifier que le mot de passe ou la passphrase fait au maximum 72 caractères sinonrenvoyer une erreur 
@@ -59,7 +81,6 @@ class UserService {
       }
 
       // Envoi de l'échec si le mot de passe ne respecte pas les tests owasp
-      console.log('owasp: ', owasp.test(password).errors);
       if (owasp.test(password).errors.length) {
         reject(new Error('Une erreur est survenue lors de la création du mot de passe'));
       } else {
