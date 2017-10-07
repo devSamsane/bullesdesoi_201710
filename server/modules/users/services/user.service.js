@@ -1,14 +1,11 @@
 // Déclaration des librairies nodeJS
-const path = require('path');
 
 // Déclaration des librairies
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const generatePassword = require('generate-password');
 const owasp = require('owasp-password-strength-test');
 
 // Déclaration des fichiers de configuration
-const config = require(path.resolve('./server/lib/config/index.js'));
 const UserRepository = require('../repositories/user.repository');
 
 // Paramétrage bcrypt

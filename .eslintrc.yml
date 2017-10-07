@@ -54,7 +54,7 @@ rules:
   }]
   arrow-body-style: [error, as-needed, { requireReturnForObjectLiteral: true }]
   func-names: [error, as-needed]
-  no-underscore-dangle: [error, {allow: [_links, _embedded, _config]}]
+  no-underscore-dangle: [error, {allow: [_links, _embedded, _config, _id]}]
   no-multi-spaces: [error, {ignoreEOLComments: true}]
   accessor-pairs: error
   arrow-spacing: [error, { before: true, after: true }]

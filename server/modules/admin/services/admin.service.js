@@ -66,12 +66,11 @@ class AdminService {
    * Méthode de suppression d'un utilisateur, via son id
    * 
    * @static deleteUser
-   * @param {any} userId 
+   * @param {object} user 
    * @memberof AdminService
    */
-  static async deleteUser (userId) {
-    return userId.remove();
+  static async deleteUser (user) {
+    return Promise.resolve(user.remove());
   }
 }
-
 module.exports = AdminService;

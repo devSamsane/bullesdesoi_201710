@@ -1,5 +1,4 @@
 // Déclaration des librairies nodeJS
-const path = require('path');
 
 // Déclaration des librairies
 const mongoose = require('mongoose');
@@ -23,9 +22,8 @@ class UserRepository {
   }
 
   // Récupération d'un utilisateur par son id
-  static getUserById (id) {
-
-    return User.findOne({_id: String(id)}).exec();
+  static getUserById (userId) {
+    return User.findOne({_id: String(userId)}).exec();
   }
 
   // Récupération d'un utilisateur par son email

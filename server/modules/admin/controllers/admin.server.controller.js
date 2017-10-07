@@ -9,16 +9,16 @@ const AdminService = require('../services/admin.service');
 const ApiError = require(path.resolve('./server/lib/helpers/ApiError'));
 
 // Initialisation des models
-let User = require(path.resolve('./server/modules/models/user.server.model'));
-User = mongoose.model('User');
+// User = require(path.resolve('./server/modules/models/user.server.model'));
+const User = mongoose.model('User');
 
 /**
  * Passage des informations du user dans le middleware expressJS
  * @name userByID
- * @param {string} userId id de l'utilisateur
+ * @param {objectId} userId id de l'utilisateur
  * @returns {object} modelUser du user accessible par le paramètre req de expressJS 
  */
-exports.userByID = (req, res, next, userId) => {
+exports.getUserByID = (req, res, next, userId) => {
   // Vérification que le userId est un id valide au sens mongoose
   // Utilisation de la méthode `isValid` de mongoose
   if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -28,11 +28,11 @@ exports.userByID = (req, res, next, userId) => {
       message: 'Information utilisateur erronée'
     });
   }
-  User.findById(userId, '-password', '-providerData').exec((err, user) => {
-    if (err) {
+  User.findById(userId, '-password, -providerData').exec((error, user) => {
+    if (error) {
       res.status(500).json({
         title: 'Erreur interne du serveur',
-        message: err
+        message: error
       });
       return next();
     } else if (!user) {
@@ -44,7 +44,7 @@ exports.userByID = (req, res, next, userId) => {
     }
     // Passage des informations du user au middleware
     req.modelUser = user;
-    next();
+    return next();
   });
 };
 
@@ -69,26 +69,13 @@ exports.signupByAdmin = async (req, res, next) => {
  * Suppression d'un user via le backoffice d'administration
  * TODO: Ajouter le filtre qui vérifie que l'admin est authentifié et bien admin
  * TODO: Répercuter la suppression de l'utilisateur sur l'ensemble des collections
- * @name deleteUser
+ * @name deleteUserByAdmin
  */
-exports.deleteUser = (req, res) => {
+exports.deleteUserByAdmin = (req, res) => {
   const user = req.modelUser;
-
-  user.remove(error => {
-    if (error) {
-      return res.status(409).json({
-        title: 'La requête ne peut pas être traitée',
-        message: `L'utilisateur ${user} est inconnu`
-      });
-    }
-
-    return res.status(200).json({
-      title: `Suppression du user: ${user}`,
-      message: 'Succés'
-    });
+  AdminService.deleteUser(user);
+  return res.status(200).json({
+    title: `Suppression du user: ${user._id}`,
+    message: 'Succés'
   });
-};
-
-exports.deleteByAdmin = (req, res) => {
-  return AdminService.deleteUser();
 };
