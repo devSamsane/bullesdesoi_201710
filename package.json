@@ -10,7 +10,8 @@
     "lint": "npm run eslint && npm run stylelint",
     "stylelint": "./node_modules/.bin/stylelint src/**/*.css src/**/*.scss",
     "start": "nodemon server.js",
-    "start:debug": "NODE_ENV=development nodemon --inspect server.js"
+    "start:debug": "NODE_ENV=development nodemon --inspect server.js",
+    "generate-ssl-certs": "server/lib/scripts/generate-ssl-certs.sh"
   },
   "author": "Sams@ne",
   "license": "ISC",
