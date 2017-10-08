@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 /**
- * Définition de la class UserRepository 
+ * Définition de la class UserRepository
  * @class UserRepository
  */
 class UserRepository {

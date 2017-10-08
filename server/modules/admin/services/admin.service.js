@@ -2,17 +2,15 @@
 const path = require('path');
 
 // Déclaration des librairies
-// const mongoose = require('mongoose');
 
 // Déclaration des fichiers de configuration
-// const config = require(path.resolve('./server/lib/config/index.js'));
+const config = require(path.resolve('./server/lib/config/index.js'));
 const UserRepository = require(path.resolve('./server/modules/users/repositories/user.repository'));
 const UserService = require(path.resolve('./server/modules/users/services/user.service.js'));
 
 /**
  * Définition de la class AdminService
  * Publication des services de la fonction admin
- * TODO: Générer un mot de passe à la création et l'envoyer par email au client
  * TODO: Demander la réinitialisation du mot de passe à la première connexion
  * @class AdminService
  */
@@ -20,9 +18,8 @@ class AdminService {
 
   /**
    * Méthode de création d'un utilisateur par le backoffice d'administration
-   * 
    * @static createUser
-   * @param {object} userObject 
+   * @param {object} userObject
    * @returns {object} user json
    * @memberof AdminService
    */
@@ -41,10 +38,12 @@ class AdminService {
     // Création du mot de passe
     userObject.password = await UserService.generateRandomPassphrase();
 
-    // TODO: Envoi des informations par email
-    // if(userObject.email) {
-    // await UserService.sendEmailConfirmation(userObject.email);
-    // }
+    // Envoi des informations par email
+    if (config.mailer.active) {
+      if (userObject.email) {
+        await UserService.sendEmailConfirmation(userObject);
+      }
+    }
 
     // Hash du mot de passe
     if (userObject.password) {
@@ -64,9 +63,8 @@ class AdminService {
 
   /**
    * Méthode de suppression d'un utilisateur, via son id
-   * 
    * @static deleteUser
-   * @param {object} user 
+   * @param {object} user
    * @memberof AdminService
    */
   static async deleteUser (user) {

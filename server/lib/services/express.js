@@ -70,7 +70,10 @@ module.exports.initMiddleware = app => {
  */
 module.exports.initViewEngine = app => {
   app.engine('hbs', hbs.express4({
-    partialsDir: path.resolve('./dist/views'),
+    partialsDir: [
+      path.resolve('./dist/views'),
+      path.resolve('./server/modules/users/templates')
+    ],
     extname: '.html'
   }));
   app.set('view engine', 'hbs');

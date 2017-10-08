@@ -16,7 +16,7 @@ const User = mongoose.model('User');
  * Passage des informations du user dans le middleware expressJS
  * @name userByID
  * @param {objectId} userId id de l'utilisateur
- * @returns {object} modelUser du user accessible par le paramètre req de expressJS 
+ * @returns {object} modelUser du user accessible par le paramètre req d'expressJS
  */
 exports.getUserByID = (req, res, next, userId) => {
   // Vérification que le userId est un id valide au sens mongoose

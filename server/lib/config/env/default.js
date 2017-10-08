@@ -42,7 +42,20 @@ module.exports = {
       maxLength: 16,
       minLength: 8,
       minPhraseLength: 20,
-      minOptionalTestsToPass: 4
+      minOptionalTestsToPass: 2
+    }
+  },
+  mailer: {
+    from: process.env.MAILER_FROM || 'contact@bullesdesoi.fr',
+    options: {
+      host: process.env.MAILER_HOST || 'auth.smtp.1and1.fr',
+      port: process.env.MAILER_PORT || '465',
+      service: process.env.MAILER_SERVICE_PROVIDER || 'bullesdesoi',
+      auth: {
+        user: process.env.MAILER_EMAIL_ID,
+        pass: process.env.MAILER_PASSWORD
+      },
+      secure: process.env.MAILER_SECURE || true
     }
   }
 };

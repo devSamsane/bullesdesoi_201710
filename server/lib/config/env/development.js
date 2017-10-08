@@ -47,5 +47,8 @@ module.exports = {
         consigne: 'consigne de la relaxation de la seance 1'
       }
     }
+  },
+  mailer: {
+    active: false
   }
 };

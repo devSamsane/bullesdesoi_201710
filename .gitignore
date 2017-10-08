@@ -34,6 +34,7 @@ testem.log
 /typings
 /logs
 /server/lib/config/sslcerts
+/src/assets/images
 
 # e2e
 /e2e/*.js
