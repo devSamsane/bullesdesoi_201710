@@ -10,7 +10,7 @@ const mongoose = require('./services/mongoose');
  * Etablissement de la connexion à MongoDB
  * Instanciation des models
  * @name startMongoose
- * @returns {object} dbConnection 
+ * @returns {object} dbConnection
  */
 function startMongoose () {
   return new Promise((resolve, reject) => {

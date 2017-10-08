@@ -180,6 +180,7 @@ rules:
   object-shorthand: [error, consistent]
   operator-linebreak: [error, after, { overrides: { ?: before, :: before } }]
   prefer-promise-reject-errors: error
+  prefer-destructuring: [error, { VariableDeclarator: { object: false } }]
   padded-blocks: warn
   quotes: [error, single, { avoidEscape: true, allowTemplateLiterals: true }]
   rest-spread-spacing: [error, never]
