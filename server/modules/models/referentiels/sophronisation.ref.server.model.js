@@ -3,6 +3,7 @@ const path = require('path');
 
 // Déclaration des librairies
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 // Déclaration des fichiers de configuration

@@ -5,19 +5,20 @@ const path = require('path');
 // const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const validator = require('validator');
+
 const Schema = mongoose.Schema;
 
 // Déclaration des fichiers de configuration
 const config = require(path.resolve('./server/lib/config/index'));
 
 /**
- * Validation de l'adresse email 
- * @param {any} email 
+ * Validation de l'adresse email
+ * @param {any} email
  * @returns {boolean}
  */
 const validateLocalStrategyEmail = email => {
   return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, {require_tld: false}));
-}
+};
 
 /**
  * Paramétrage du schéma `User`
@@ -97,7 +98,11 @@ const UserSchema = new Schema({
   active: {
     type: Boolean,
     default: true
-  }
+  },
+  seances: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Seance'
+  }]
 });
 
 /**

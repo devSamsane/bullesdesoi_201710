@@ -2,6 +2,7 @@
 
 // Déclaration des librairies
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 // Déclaration des fichiers de configuration
@@ -28,7 +29,15 @@ const SeanceSchema = new Schema({
   },
   updated: {
     type: Date
-  }
+  },
+  relaxations: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Relaxation'
+  }],
+  sophronisations: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Sophronisation'
+  }]
 });
 
 /**
