@@ -23,23 +23,27 @@ gulp.task('env:dev', () => {
  * Gulp Task: Intialisation de nodemon verbose et debug
  * @name nodemon
  */
-gulp.task('nodemon', () => plugins.nodemon({
-  script: 'server.js',
-  nodeArgs: ['--harmony', '--debug', '--inspect'],
-  ext: 'js, html',
-  watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config)
-}));
+gulp.task('nodemon', () => {
+  plugins.nodemon({
+    script: 'server.js',
+    nodeArgs: ['--harmony', '--debug', '--inspect'],
+    ext: 'js, html',
+    watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config)
+  });
+});
 
 /**
  * Gulp Task: Intialisation de nodemon sans verbose ou debug
  * @name nodemon-debug
  */
-gulp.task('nodemon-debug', () => plugins.nodemon({
-  script: 'server.js',
-  nodeArgs: ['--harmony', '--debug', '--inspect'],
-  ext: 'js, html',
-  watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config)
-}));
+gulp.task('nodemon-debug', () => {
+  plugins.nodemon({
+    script: 'server.js',
+    nodeArgs: ['--harmony', '--debug', '--inspect'],
+    ext: 'js, html',
+    watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config)
+  });
+});
 
 /**
  * Gulp Task: Surveillance des modifications des fichiers

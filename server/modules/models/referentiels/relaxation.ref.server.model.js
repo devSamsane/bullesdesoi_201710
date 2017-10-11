@@ -10,29 +10,21 @@ const Schema = mongoose.Schema;
 const config = require(path.resolve('./server/lib/config/index'));
 
 /**
- * Paramétrage du schéma `Appointment`
+ * Paramétrage du schema `RefRelaxationSchema`
  */
-const AppointmentSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  startDateTime: {
-    type: Date,
+const RefRelaxationSchema = new Schema({
+  intention: {
+    type: String,
     required: [true, config.db.msg.global.required]
   },
-  endDateTime: {
-    type: Date,
+  consigne: {
+    type: String,
     required: [true, config.db.msg.global.required]
-  },
-  isConfirmed: {
-    type: Boolean,
-    default: false
   }
 });
 
 /**
- * Initialisation du model
- * @name Appointment
+ * Création du model `RefRelaxation`
+ * @name RefRelaxation
  */
-mongoose.model('Appointment', AppointmentSchema);
+mongoose.model('RefRelaxation', RefRelaxationSchema)

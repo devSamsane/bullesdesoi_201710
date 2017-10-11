@@ -52,7 +52,7 @@ rules:
   func-style: [error, declaration, {
     allowArrowFunctions: true
   }]
-  arrow-body-style: [error, as-needed, { requireReturnForObjectLiteral: true }]
+  arrow-body-style: [error, always]
   func-names: [error, as-needed]
   no-underscore-dangle: [error, {allow: [_links, _embedded, _config, _id]}]
   no-multi-spaces: [error, {ignoreEOLComments: true}]

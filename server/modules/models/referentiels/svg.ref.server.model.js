@@ -10,29 +10,22 @@ const Schema = mongoose.Schema;
 const config = require(path.resolve('./server/lib/config/index'));
 
 /**
- * Paramétrage du schéma `Appointment`
+ * Paramétrage du schema `RefSVGSchema`
  */
-const AppointmentSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  startDateTime: {
-    type: Date,
+const RefSVGSchema = new Schema({
+  name: {
+    type: String,
     required: [true, config.db.msg.global.required]
   },
-  endDateTime: {
-    type: Date,
+  content: {
+    type: String,
     required: [true, config.db.msg.global.required]
-  },
-  isConfirmed: {
-    type: Boolean,
-    default: false
   }
+
 });
 
 /**
- * Initialisation du model
- * @name Appointment
+ * Création du model `RefSVG`
+ * @name RefSVG
  */
-mongoose.model('Appointment', AppointmentSchema);
+mongoose.model('RefSVG', RefSVGSchema);
