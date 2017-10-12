@@ -1,12 +1,11 @@
 // Déclaration des librairies nodeJS
-const path = require('path');
 
 // Déclaration des librairies
 const mongoose = require('mongoose');
 
 // Déclaration des fichiers de configuration
 const AdminService = require('../services/admin.service');
-const ApiError = require(path.resolve('./server/lib/helpers/ApiError'));
+const ApiError = require('../../../lib/helpers/ApiError');
 
 // Initialisation des models
 // User = require(path.resolve('./server/modules/models/user.server.model'));

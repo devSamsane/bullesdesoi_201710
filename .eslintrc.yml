@@ -181,7 +181,7 @@ rules:
   operator-linebreak: [error, after, { overrides: { ?: before, :: before } }]
   prefer-promise-reject-errors: error
   prefer-destructuring: [error, { VariableDeclarator: { object: false } }]
-  padded-blocks: warn
+  padded-blocks: [error, { classes: always }]
   quotes: [error, single, { avoidEscape: true, allowTemplateLiterals: true }]
   rest-spread-spacing: [error, never]
   semi: [error, always]

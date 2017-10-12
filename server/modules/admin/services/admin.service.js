@@ -1,12 +1,11 @@
 // Déclaration des librairies nodeJS
-const path = require('path');
 
 // Déclaration des librairies
 
 // Déclaration des fichiers de configuration
-const config = require(path.resolve('./server/lib/config/index.js'));
-const UserRepository = require(path.resolve('./server/modules/users/repositories/user.repository'));
-const UserService = require(path.resolve('./server/modules/users/services/user.service.js'));
+const config = require('../../../lib/config/index');
+const UserRepository = require('../../users/repositories/user.repository');
+const UserService = require('../../users/services/user.service');
 
 /**
  * Définition de la class AdminService
@@ -70,5 +69,8 @@ class AdminService {
   static async deleteUser (user) {
     return Promise.resolve(user.remove());
   }
+
 }
+
+// Export de la class AdminService
 module.exports = AdminService;

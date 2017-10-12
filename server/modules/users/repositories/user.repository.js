@@ -31,6 +31,8 @@ class UserRepository {
   static getUserByEmail (email) {
     return User.findOne({username: String(email)}).exec();
   }
+
 }
 
+// Export de la class UserRepository
 module.exports = UserRepository;

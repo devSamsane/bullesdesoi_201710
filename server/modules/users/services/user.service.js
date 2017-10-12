@@ -10,7 +10,7 @@ const hbsMailer = require('nodemailer-express-handlebars');
 
 // Déclaration des fichiers de configuration
 const UserRepository = require('../repositories/user.repository');
-const config = require(path.resolve('./server/lib/config/index'));
+const config = require('../../../lib/config/index');
 
 // Paramètres divers
 const SALT_ROUNDS = 10;
@@ -135,6 +135,8 @@ class UserService {
       });
     });
   }
+
 }
 
+// Export de la class UserService
 module.exports = UserService;

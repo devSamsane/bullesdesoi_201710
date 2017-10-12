@@ -1,5 +1,4 @@
 // Déclaration nodeJS
-const path = require('path');
 
 // Déclaration des librairies
 const _ = require('lodash');
@@ -7,8 +6,8 @@ const mongoose = require('mongoose');
 const chalk = require('chalk');
 
 // Déclaration des fichiers de configuration
-const config = require(path.resolve('./server/lib/config/index'));
-const UserService = require(path.resolve('./server/modules/users/services/user.service'));
+const config = require('../config/index');
+const UserService = require('../../modules/users/services/user.service');
 
 // Déclaration de l'objet seed
 let seedOptions = {};
@@ -19,7 +18,12 @@ let seedOptions = {};
  * @class SeedService
  */
 class SeedService {
-
+  /**
+   * Log du user et du mot de passe
+   * @static reportSeeding
+   * @param {any} userSeeded
+   * @memberof SeedService
+   */
   static async reportSeeding (userSeeded) {
     return new Promise((resolve, reject) => {
       // Vérification que le log des informations est actif

@@ -28,7 +28,7 @@ gulp.task('nodemon', () => {
     script: 'server.js',
     nodeArgs: ['--harmony', '--debug', '--inspect'],
     ext: 'js, html',
-    watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config)
+    watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config, defaultAssets.server.models)
   });
 });
 
@@ -41,7 +41,7 @@ gulp.task('nodemon-debug', () => {
     script: 'server.js',
     nodeArgs: ['--harmony', '--debug', '--inspect'],
     ext: 'js, html',
-    watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config)
+    watch: _.union(defaultAssets.server.allJS, defaultAssets.server.config, defaultAssets.server.models)
   });
 });
 
@@ -70,7 +70,8 @@ gulp.task('watch', () => {
 gulp.task('eslint', () => {
   const assets = _.union(
     defaultAssets.server.gulpConfig,
-    defaultAssets.server.allJS
+    defaultAssets.server.allJS,
+    defaultAssets.server.models
   );
 
   return gulp.src(assets)

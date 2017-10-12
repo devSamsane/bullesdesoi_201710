@@ -1,5 +1,4 @@
 // Déclaration des librairies nodeJS
-const path = require('path');
 
 // Déclaration des librairies
 const mongoose = require('mongoose');
@@ -7,7 +6,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Déclaration des fichiers de configuration
-const config = require(path.resolve('./server/lib/config/index'));
+const config = require('../../lib/config/index');
 
 /**
  * Paramétrage du schéma `Sophronisation`

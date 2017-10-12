@@ -1,5 +1,4 @@
 // Déclaration des librairies nodeJS
-const path = require('path');
 
 // Déclaration des librairies
 // const bcrypt = require('bcrypt');
@@ -9,7 +8,7 @@ const validator = require('validator');
 const Schema = mongoose.Schema;
 
 // Déclaration des fichiers de configuration
-const config = require(path.resolve('./server/lib/config/index'));
+const config = require('../../lib/config/index');
 
 /**
  * Validation de l'adresse email

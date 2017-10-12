@@ -134,25 +134,25 @@ const initGlobalConfig = () => {
   validateEnvironmentVariable();
 
   // Récupération des assets par défaut
-  const defaultAssets = require(path.resolve('./server/lib/config/assets/default'));
+  const defaultAssets = require('../config/assets/default');
 
   // Récupération des assets selon l'environnement
-  const environmentAssets = require(path.resolve(`./server/lib/config/assets/${process.env.NODE_ENV}.js`));
+  const environmentAssets = require(`../config/assets/${process.env.NODE_ENV}.js`);
 
   // Merge des assets
   const assets = _.merge(defaultAssets, environmentAssets);
 
   // Récupération de la configuration par défaut
-  const defaultConfig = require(path.resolve('./server/lib/config/env/default'));
+  const defaultConfig = require('../config/env/default');
 
   // Récupération de la configuration selon l'environnement
-  const environmentConfig = require(path.resolve(`./server/lib/config/env/${process.env.NODE_ENV}.js`));
+  const environmentConfig = require(`../config/env/${process.env.NODE_ENV}.js`);
 
   // Merge de la configuration
   const config = _.merge(defaultConfig, environmentConfig);
 
   // Enrichissement des informations du package.json
-  const pkg = require(path.resolve('./package.json'));
+  const pkg = require('../../../package.json');
   config.bullesdesoi = pkg;
 
   // Initialisation des fichiers de configurations
