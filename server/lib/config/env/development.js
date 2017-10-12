@@ -13,8 +13,9 @@ module.exports = {
     uri: process.env.MONGODB_URI || `mongodb://${process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost'}/bullesdesoi-dev`
   },
   seedDB: {
-    seed: process.env.MONGO_SEED === 'true',
+    seed: process.env.MONGO_SEED || 'active',
     options: {
+      logResults: true,
       seedUser: {
         email: 'seeduser@localhost.com',
         firstname: 'seeduser',

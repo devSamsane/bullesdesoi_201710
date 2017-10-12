@@ -4,9 +4,10 @@
 const mongoose = require('mongoose');
 
 // Déclaration des fichiers de configuration
+let User = require('../../models/user.server.model');
 
 // Initialisation du model User
-const User = mongoose.model('User');
+User = mongoose.model('User');
 
 /**
  * Définition de la class UserRepository

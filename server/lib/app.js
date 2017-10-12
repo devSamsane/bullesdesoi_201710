@@ -1,10 +1,13 @@
-// déclaration des librairies
+// Déclaration nodeJS
+
+// Déclaration des librairies
 const chalk = require('chalk');
 
-// déclaration des fichiers de configuration
+// Déclaration des fichiers de configuration
 const config = require('./config/index');
 const express = require('./services/express');
 const mongoose = require('./services/mongoose');
+const SeedService = require('./services/seed');
 
 /**
  * Etablissement de la connexion à MongoDB
@@ -20,9 +23,29 @@ function startMongoose () {
         resolve(dbConnection);
       })
       .catch(error => {
-        console.error(chalk.red(error));
         reject(error);
       });
+  });
+}
+
+/**
+ * Initialisation du seeding
+ * @name startSeeding
+ */
+function startSeeding () {
+  return new Promise((resolve, reject) => {
+    if (config.seedDB.seed === 'active') {
+      console.info(chalk.bold.blue('Information: La fonction seed est active'));
+      SeedService.start()
+        .then(() => {
+          resolve();
+        })
+        .catch(error => {
+          reject(error);
+        });
+    } else {
+      console.info(chalk.bold.blue('Information: La fonction seed est inactive'));
+    }
   });
 }
 
@@ -37,7 +60,6 @@ function startExpress () {
     try {
       app = express.init();
     } catch (error) {
-      console.warn(chalk.red(error));
       return reject(error);
     }
 
@@ -54,17 +76,19 @@ function bootstrap () {
   return new Promise(async (resolve, reject) => {
     let app;
     let db;
+    let seed;
 
     try {
       db = await startMongoose();
       app = await startExpress();
+      seed = await startSeeding();
     } catch (error) {
-      return reject(new Error('Impossible d\'intialiser ExpressJS ou le service Mongoose'));
+      return reject(new Error('Impossible d\'intialiser ExpressJS, le service Mongoose ou le seeding'));
     }
-
     return resolve({
       db: db,
-      app: app
+      app: app,
+      seed: seed
     });
   });
 }
