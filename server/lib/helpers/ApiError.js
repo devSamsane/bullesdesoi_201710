@@ -9,6 +9,13 @@ const API_ERROR_CODES = {
 };
 
 class ApiError extends Error {
+
+  /**
+   * Creates an instance of ApiError.
+   * @param {any} message
+   * @param {any} [{status, code}={}]
+   * @memberof ApiError
+   */
   constructor (message, {status, code} = {}) {
     super(message);
 
@@ -23,6 +30,8 @@ class ApiError extends Error {
 
     Error.captureStackTrace(this, this.constructor);
   }
+
 }
 
+// Export de la class ApiError
 module.exports = ApiError;

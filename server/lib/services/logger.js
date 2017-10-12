@@ -12,7 +12,13 @@ const config = require('../config/index');
 let logger;
 let loggerExpress;
 
-module.exports = class Logger {
+class Logger {
+
+  /**
+   * Instanciation du logger
+   * @static log
+   * @returns
+   */
   static log () {
     if (logger) {
       return logger;
@@ -39,8 +45,12 @@ module.exports = class Logger {
     return logger;
   }
 
-  // Passage des options à utiliser avec winston
-  // Retourne un objet winston avec les options et paramètres
+  /**
+   * Passage des options à utiliser avec winston
+   * Retourne un objet winston avec les options et paramètres
+   * @static setupFileLogger
+   * @returns
+   */
   static setupFileLogger () {
     const _config = _.clone(config, true);
     const configFileLogger = _config.log.fileLogger;
@@ -71,7 +81,11 @@ module.exports = class Logger {
     };
   }
 
-  // Utilisation de Express Logger
+  /**
+   * Définition du logger ExpressJS
+   * @static logExpress
+   * @returns
+   */
   static logExpress () {
     if (loggerExpress) {
       return loggerExpress;
@@ -92,4 +106,8 @@ module.exports = class Logger {
 
     return loggerExpress;
   }
-};
+
+}
+
+// Export de la class Logger
+module.exports = Logger;

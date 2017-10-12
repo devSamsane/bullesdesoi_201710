@@ -18,6 +18,7 @@ let seedOptions = {};
  * @class SeedService
  */
 class SeedService {
+
   /**
    * Log du user et du mot de passe
    * @static reportSeeding
@@ -194,6 +195,7 @@ class SeedService {
       }
     });
   }
+
 }
 
 // Export de la class SeedService
