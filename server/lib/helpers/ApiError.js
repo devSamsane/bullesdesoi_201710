@@ -16,7 +16,7 @@ class ApiError extends Error {
    * @param {any} [{status, code}={}]
    * @memberof ApiError
    */
-  constructor (message, {status, code} = {}) {
+  constructor (message, { status, code } = {}) {
     super(message);
 
     // Configuration du code status HTTP

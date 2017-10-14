@@ -24,12 +24,12 @@ class UserRepository {
 
   // Récupération d'un utilisateur par son id
   static getUserById (userId) {
-    return User.findOne({_id: String(userId)}).exec();
+    return User.findOne({ _id: String(userId) }).exec();
   }
 
   // Récupération d'un utilisateur par son email
   static getUserByEmail (email) {
-    return User.findOne({username: String(email)}).exec();
+    return User.findOne({ username: String(email) }).exec();
   }
 
 }

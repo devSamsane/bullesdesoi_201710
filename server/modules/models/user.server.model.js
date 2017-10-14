@@ -16,7 +16,7 @@ const config = require('../../lib/config/index');
  * @returns {boolean}
  */
 const validateLocalStrategyEmail = email => {
-  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, {require_tld: false}));
+  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, { require_tld: false }));
 };
 
 /**

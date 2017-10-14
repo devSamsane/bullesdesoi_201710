@@ -106,7 +106,7 @@ exports.start = function start () {
     let db;
 
     try {
-      ({db, app} = await bootstrap());
+      ({ db, app } = await bootstrap());
     } catch (error) {
       return reject(error);
     }

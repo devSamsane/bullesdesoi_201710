@@ -31,7 +31,7 @@ module.exports.loadModels = () => {
 module.exports.connect = () => {
   return new Promise((resolve, reject) => {
     mongoose.Promise = config.db.promise;
-    const mongoOptions = {...config.db.options, useMongoClient: true};
+    const mongoOptions = { ...config.db.options, useMongoClient: true };
     mongoose.connect(config.db.uri, mongoOptions)
       .then(() => {
         // Activation du mode debug si nécessaire

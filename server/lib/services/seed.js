@@ -48,7 +48,7 @@ class SeedService {
       const User = mongoose.model('User');
 
       // Recherche et suppression de l'utilisateur
-      User.find({email: user.email}).remove(error => {
+      User.find({ email: user.email }).remove(error => {
         if (error) {
           reject(new Error(`Impossible de supprimer l'utilisateur ${user.email}`));
         }
@@ -90,7 +90,7 @@ class SeedService {
 
       // Recherche du user dans la bd par son adresse mail
       // Renvoi une erreur ou la liste des utilisateurs (normalement on ne doit en avoir qu'un car contrainte sur le modèle)
-      User.find({email: user.email}, (error, users) => {
+      User.find({ email: user.email }, (error, users) => {
         if (error) {
           // La recherche n'a pas pu aboutir
           reject(new Error(`La recherche d'un utilisateur par son email n'a pas pu aboutir`));
