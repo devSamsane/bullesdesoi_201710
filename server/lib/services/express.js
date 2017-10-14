@@ -71,13 +71,13 @@ module.exports.initMiddleware = app => {
 module.exports.initViewEngine = app => {
   app.engine('hbs', hbs.express4({
     partialsDir: [
-      path.resolve('./dist/views'),
+      path.resolve('./server/views'),
       path.resolve('./server/modules/users/templates')
     ],
     extname: '.html'
   }));
   app.set('view engine', 'hbs');
-  app.set('views', path.resolve('./dist/views'));
+  app.set('views', path.resolve('./server/views'));
 };
 
 /**
@@ -120,6 +120,7 @@ module.exports.initModulesConfiguration = app => {
  */
 module.exports.initModulesClientRoutes = app => {
   // Paramétrage du router et du répertoire de fichiers statiques
+  app.use('/', express.static(path.resolve('./server/views')));
   app.use('/', express.static(path.resolve('./dist')));
   app.use('/', express.static(path.resolve('./dist/views')));
 };

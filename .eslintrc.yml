@@ -47,13 +47,12 @@ rules:
   max-len: [warn, 120]
   one-var: [error, { var: "never", let: "never", const: "never" }]
   one-var-declaration-per-line: [error, initializations]
-  object-curly-spacing: [error, never]
   arrow-parens: [error, as-needed]
   func-style: [error, declaration, {
     allowArrowFunctions: true
   }]
   arrow-body-style: [error, always]
-  func-names: [error, as-needed]
+  func-names: [warn, as-needed]
   no-underscore-dangle: [error, {allow: [_links, _embedded, _config, _id]}]
   no-multi-spaces: [error, {ignoreEOLComments: true}]
   accessor-pairs: error
@@ -177,7 +176,7 @@ rules:
   no-prototype-builtins: 1
   no-with: error
   object-property-newline: [error, { allowMultiplePropertiesPerLine: true }]
-  object-shorthand: [error, consistent]
+  object-shorthand: [warn, always, { ignoreConstructors: true }]
   operator-linebreak: [error, after, { overrides: { ?: before, :: before } }]
   prefer-promise-reject-errors: error
   prefer-destructuring: [error, { VariableDeclarator: { object: false } }]
@@ -222,4 +221,4 @@ rules:
   standard/array-bracket-even-spacing: [error, either]
   standard/computed-property-even-spacing: [error, even]
   standard/no-callback-literal: error
-  standard/object-curly-even-spacing: [error, either]
+  standard/object-curly-even-spacing: [1, either]
