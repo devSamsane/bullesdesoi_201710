@@ -11,6 +11,19 @@ const ApiError = require('../../../lib/helpers/ApiError');
 // User = require(path.resolve('./server/modules/models/user.server.model'));
 const User = mongoose.model('User');
 
+exports.getUsers = (req, res, next) => {
+  User.find().exec((error, users) => {
+    if (error) {
+      res.status(500).json({
+        title: 'Erreur interne du serveur',
+        message: error
+      });
+      return next();
+    }
+    return res.json(users);
+  });
+};
+
 /**
  * Passage des informations du user dans le middleware expressJS
  * @name userByID

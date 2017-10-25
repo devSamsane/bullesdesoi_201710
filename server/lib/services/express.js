@@ -61,6 +61,13 @@ module.exports.initMiddleware = app => {
   }));
   app.use(bodyParser.json());
   app.use(methodOverride());
+
+  // BUG: Fixes Access-Control-Allow-Origin
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type');
+    next();
+  });
 };
 
 /**
